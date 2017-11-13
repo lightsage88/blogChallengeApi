@@ -43,4 +43,55 @@ router.get('/', function(req, res){
 	res.json(BlogPosts.get());
 });
 
+router.post('/', jsonParser, function (req, res){
+	const requiredFields = ['title', 'content'];
+	for(let dmx=0; dmx<requiredFields.length; dmx++) {
+		const field = requiredFields[dmx];
+		if(!(field in req.body)) {
+			const message = `DMX is sad about your emptiness
+			you're missing \`${field}\` in those wack bars you
+			wrote!`;
+			console.error(message);
+			return res.status(400).send(message);
+		}
+	}
+	const item = BlogPosts.create(req.body.name, req.body.entry);
+	res.status(201).json(item);
+});
+
+router.delete(':/id', function (req, res) {
+	BlogPosts.delete(req.params.id);
+	console.log(`Deleted shopping list item \`${req.params.ID}\``);
+	res.status(204).end();
+});
+
+router.put('/:id', jsonParser, function(req, res){
+	const requiredFields = ['title', 'content', 'id'];
+	for(let dmx=0; dmx<requiredFields.length, dmx++) {
+		const field = requiredFields[dmx];
+		if(!(field in req.body)) {
+			const message = `Y'all gonna make me lose my mind up in here, up in Here
+			cuz yo request is missing \`${field}\` in da request body, cuh`;
+			console.error(message);
+			res.status(400).send(message);
+		}
+	}
+	if(req.params.id !== req.body.id) {
+		const message = (
+			`Request path id (${req.params.id}) and request body id
+			(${req.body.id}) must match`);
+		console.error(message);
+		return res.status(400).send(message);
+	}
+	console.log(`Updating blog post entry \`${req.params.id}\``);
+	const updatedPost = BlogPosts.update({
+		id: req.params.id,
+		title: req.body.title
+		content: req.body.content
+	});
+	res.status(204).end();
+});
+
+
+
 module.exports = router;
