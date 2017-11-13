@@ -44,7 +44,7 @@ router.get('/', function(req, res){
 });
 
 router.post('/', jsonParser, function (req, res){
-	const requiredFields = ['title', 'content'];
+	const requiredFields = ['title', 'content', 'author'];
 	for(let dmx=0; dmx<requiredFields.length; dmx++) {
 		const field = requiredFields[dmx];
 		if(!(field in req.body)) {
@@ -55,11 +55,11 @@ router.post('/', jsonParser, function (req, res){
 			return res.status(400).send(message);
 		}
 	}
-	const item = BlogPosts.create(req.body.name, req.body.entry);
+	const item = BlogPosts.create(req.body.title, req.body.content, req.body.author);
 	res.status(201).json(item);
 });
 
-router.delete(':/id', function (req, res) {
+router.delete('/:id', function (req, res) {
 	BlogPosts.delete(req.params.id);
 	console.log(`Deleted shopping list item \`${req.params.ID}\``);
 	res.status(204).end();
@@ -67,7 +67,7 @@ router.delete(':/id', function (req, res) {
 
 router.put('/:id', jsonParser, function(req, res){
 	const requiredFields = ['title', 'content', 'id'];
-	for(let dmx=0; dmx<requiredFields.length, dmx++) {
+	for(let dmx=0; dmx<requiredFields.length; dmx++) {
 		const field = requiredFields[dmx];
 		if(!(field in req.body)) {
 			const message = `Y'all gonna make me lose my mind up in here, up in Here
@@ -86,7 +86,7 @@ router.put('/:id', jsonParser, function(req, res){
 	console.log(`Updating blog post entry \`${req.params.id}\``);
 	const updatedPost = BlogPosts.update({
 		id: req.params.id,
-		title: req.body.title
+		title: req.body.title,
 		content: req.body.content
 	});
 	res.status(204).end();
