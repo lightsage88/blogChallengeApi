@@ -7,11 +7,9 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('Blog Machine', function(){
-
 before(function(){
 	return runServer();
 });
-
 after(function(){
 	return closeServer();
 });
