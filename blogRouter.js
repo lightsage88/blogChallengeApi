@@ -61,7 +61,7 @@ router.post('/', jsonParser, function (req, res){
 
 router.delete('/:id', function (req, res) {
 	BlogPosts.delete(req.params.id);
-	console.log(`Deleted shopping list item \`${req.params.ID}\``);
+	console.log(`Deleted blog post \`${req.params.ID}\``);
 	res.status(204).end();
 });
 
