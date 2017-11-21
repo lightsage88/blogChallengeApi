@@ -36,9 +36,7 @@ after(function(){
 		const nuevoPost = {
 			title: "The Real Slim Shady",
 			content: "chicka chicka SLIM SHADY", 
-			author: "Eminem",
-
-
+			author: "Eminem"
 		};
 		return chai.request(app)
 		.post('/blog')
