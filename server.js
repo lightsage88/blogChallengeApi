@@ -14,12 +14,14 @@ app.get('/', function(req, res){
 	res.sendFile( __dirname + '/views/index.html');
 });
 
-app.use('/blog', blogRouter);
 
-app.listen(process.env.PORT || 8070, function(){
-	console.log(`Your app is bumpin on port 
-		${process.env.PORT ||8070}. Neato, huh?`);
-});
+//app.listen(process.env.PORT || 8080, function(){
+//	console.log(`Your app is bumpin on port 
+//		${process.env.PORT ||8080}. Neato, huh?`);
+//});
+
+
+app.use('/blog', blogRouter);
 
 let server;
 
@@ -27,7 +29,7 @@ let server;
 // In our test code, we need a way of asynchronously starting
 // our server, since we'll be dealing with promises there.
 function runServer() {
-  const port = process.env.PORT || 8070;
+  const port = process.env.PORT || 8080;
   return new Promise((resolve, reject) => {
     server = app.listen(port, () => {
       console.log(`Your app is listening on port ${port}`);
