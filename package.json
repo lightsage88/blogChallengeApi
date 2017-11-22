@@ -4,11 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha ./test"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lightsage88/blogChallengeApi.git"
+    "url": "https://github.com/lightsage88"
   },
   "author": "",
   "license": "ISC",
